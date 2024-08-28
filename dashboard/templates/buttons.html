@@ -1,0 +1,32 @@
+<!-- Add this at the top or wherever appropriate in your buttons.html file -->
+ <center style="margin-top: 100px">
+<a href="{% url 'logout' %}" class="btn btn-danger"><button style="font-size: 55px; margin-bottom: 50px;">Logout</button></a>
+<br>
+<br>
+<!-- Your existing button list goes here -->
+{% for button in buttons %}
+<button 
+    id="button-{{ button.id }}" 
+    onclick="openLink({{ button.id }}, '{{ button.link }}')"
+    style="background-color: {% if button.clicked %}gray{% else %}initial{% endif %}; padding: 20px; margin-right: 40px; margin-bottom: 40px;"
+    {% if button.clicked %}disabled{% endif %}
+>
+    <span style="font-size: 50px;">{{ button.title }}<span>
+</button>
+{% endfor %}
+
+</center>
+
+<script>
+function openLink(buttonId, link) {
+    fetch(`/click-button/${buttonId}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.open(link, '_blank');
+                document.getElementById(`button-${buttonId}`).style.backgroundColor = 'gray';
+                document.getElementById(`button-${buttonId}`).disabled = true;
+            }
+        });
+}
+</script>

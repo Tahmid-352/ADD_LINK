@@ -1,0 +1,27 @@
+<center style="margin-top: 100px">
+<h2>Register</h2>
+<form method="POST">
+    {% csrf_token %}
+    <span style="font-size: 40px;">{{ form.as_p }}<span>
+    <button style="font-size: 45px;" type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</center>
+
+<style>
+    #id_username {
+        height: 107px;
+        font-size: 34px;
+    }
+    #id_password1 {
+        height: 107px;
+        font-size: 34px;
+    }
+    #id_password2 {
+        height: 107px;
+        font-size: 34px;
+    }
+    p {
+        font-size: 40px;
+    }
+</style>
